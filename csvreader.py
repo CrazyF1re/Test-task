@@ -7,15 +7,21 @@ class CsvReader:
     """
     instead of csv module class allows read csv files by path
     """
-    def __init__(self, paths:list[str]):
-        self.data = []
+    def __init__(self):
+        self.data:list[dict] = []
+        self.paths:list[str] = []
+
+    def set_paths(self, paths:list[str]):
+        "set paths from string args"
         self.paths = paths
         for path in paths:
             assert os.path.isfile(path), f"{path} - Incorrect path to file"
+
     def read_files(self):
         "read all files into list"
         for i in self.paths:
             self.read_file(i)
+
     def read_file(self, path:str):
         "read file using path"
         with open(path, encoding='utf-8') as f:
